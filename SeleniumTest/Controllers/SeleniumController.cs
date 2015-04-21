@@ -1,5 +1,6 @@
 ﻿namespace SeleniumTest.Controllers
 {
+    using Helpers;
     using Models;
     using OpenQA.Selenium;
     using System;
@@ -26,8 +27,8 @@
                 // navigate to Google
                 bot.Driver.Navigate().GoToUrl("https://www.google.com/");
 
-                // search for Hello World
-                bot.Driver.FindElement(By.Name("q")).SendKeys("Hello World");
+                // wait for page to load, then populate the search ipnut
+                bot.Driver.WaitUntilExists(By.Name("q")).SendKeys("Hello World");
 
                 // click submit
                 bot.Driver.FindElement(By.Name("btnK")).Click();
