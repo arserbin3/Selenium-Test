@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @Html.ActionLink("View the demos here","Index","Selenium")
+
+    <h2>List of steps to build the demos:</h2>
+
+    <h3>Optional MVC pre-setup</h3>
+    <ul>
+        <li><em>File > New Project > Empty Project</em></li>
+        <li>Add the <a href="https://www.nuget.org/packages/Microsoft.AspNet.Mvc/">MVC nuget package</a></li>
+        <li>Add the <a href="https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax/">MS jQuery Unobtrusive Ajax nuget package</a> for Ajax HtmlHelpers</li>
+        <li>Make a Controllers folder and use <em>Add > Controller > Empty Controller...</em> to make a HomeController</li>
+        <li><em>Add > New item > Global Application Class</em>, and include the standard route config in Application_Start</li>
+        <li>Add this Index.cshtml view, and a /Views/Web.config with references.</li>
+        <li>The app now has MVC installed</li>
+    </ul>
+
+    <h3>Selenium setup</h3>
+    <ul>
+        <li>Add the <a href="https://www.nuget.org/packages/Selenium.Support">Selenium.Support nuget package</a></li>
+        <li>Add <em>SeleniumHelpers.cs</em>, which contains some helper methods I wrote for repetitive code (optional)</li>
+        <li>Add <em>SeleniumController.cs</em>, with a couple demos using Selenium</li>
+        <li>Download <a href=""><strong>32-bit</strong> IEDriverServer.exe<a /> and add it to the <strong>root</strong> of the project.
+            <ul>
+                <li>Edit its properties and set the <em>Copy to Output Directory</em> to <em>Copy always</em>. This is important.</li>
+                <li>If you use 64-bit, it will be very very slow without a Windows Registry or compile tweak. Email if needed.</li>
+            </ul>
+        </li>
+        <li>Under the solution's <em>Properties > Build Events > Pre-build event command line</em>, add this one liner. It allows copying the IEDriverServer.exe to complete cleanly every time.
+            <ul>
+                <li><code>(if exist "$(TargetDir)*.exe" del "$(TargetDir)*.exe") & (if exist "$(TargetDir)*.exe" ren "$(TargetDir)*.exe" *.old.exe)</code></li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
